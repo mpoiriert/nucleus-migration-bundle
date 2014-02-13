@@ -1,0 +1,31 @@
+{
+    "name": "mpoiriert/nucleus-migration-bundle",
+    "type": "library",
+    "minimum-stability": "dev",
+    "description": "Bundle that help execution of migration script base on command",
+    "keywords": ["bundle","symfony","nucleus","migration"],
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Martin Poirier Theoret",
+            "email": "mpoiriert@gmail.com"
+        }
+    ],
+
+    "require-dev": {
+        "phpunit/phpunit": "3.7.*",
+        "symfony/symfony": "~2.4"
+    },
+    "require": {
+        "php": ">=5.3",
+        "symfony/framework-bundle": "~2.4",
+        "mpoiriert/nucleus-bundle": "*",
+        "mpoiriert/nucleus-console-bundle": "*"
+    },
+    "autoload": {
+        "psr-0": {
+            "Nucleus\\Bundle\\MigrationBundle": "src/",
+            "Nucleus\\Migration": "src/"
+        }
+    }
+}

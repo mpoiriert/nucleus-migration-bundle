@@ -18,7 +18,7 @@ class NucleusMigrationExtensionTest extends WebTestCase
             array('nucleus_migration:runById',array('--taskId=3e0ee316fe1b25adff8b92b0ab5f0601'),__DIR__ . '/data/report/runById.txt'),
             array('nucleus_migration:markAllAsRun',array(),__DIR__ . '/data/report/markAllAsRun.txt'),
             array('nucleus_migration:runAll',array(),__DIR__ . '/data/report/runAll.txt'),
-            array('nucleus_migration:manual',array(),__DIR__ . '/data/report/manual.txt',"s\nm\n"),
+            array('nucleus_migration:manual',array(),__DIR__ . '/data/report/manual.txt',"s\nm\nq\n"),
         );
     }
 
@@ -45,6 +45,8 @@ class NucleusMigrationExtensionTest extends WebTestCase
         array_unshift($arguments,null,$command);
 
         $application->run(new ArgvInput($arguments),$output);
+
+        //file_put_contents($reportFile,$this->report($application));
 
         $this->assertStringEqualsFile($reportFile,$this->report($application));
     }

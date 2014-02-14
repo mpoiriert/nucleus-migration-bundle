@@ -19,7 +19,7 @@ class ConfigurationTest extends \PHPUnit_Framework_TestCase
     public function provideTestConfiguration()
     {
         return array(
-            array(array(),null,null),
+            array(array(),array('versions'=>array(),'tasks'=>array()),null),
         );
     }
 

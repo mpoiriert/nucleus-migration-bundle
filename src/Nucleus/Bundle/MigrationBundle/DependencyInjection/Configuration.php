@@ -27,7 +27,16 @@ class Configuration implements ConfigurationInterface
                         ->prototype('array')
                             ->children()
                                 ->scalarNode('command')->cannotBeEmpty()->end()
-                                ->arrayNode('parameters')->isRequired()->end()
+                                ->variableNode('parameters')
+                                    ->validate()
+                                    ->always(function ($v) {
+                                        if (!is_array($v)) {
+                                            throw new InvalidTypeException();
+                                        }
+                                        return $v;
+                                    })
+                                    ->end()
+                                ->end()
                                 ->scalarNode('salt')->defaultNull()->end()
                             ->end()
                         ->end()

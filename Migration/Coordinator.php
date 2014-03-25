@@ -1,6 +1,6 @@
 <?php
 
-namespace Nucleus\Migration;
+namespace Nucleus\Bundle\MigrationBundle\Migration;
 
 use Symfony\Component\Console\Application;
 use Symfony\Component\Console\Command\Command;
@@ -51,7 +51,7 @@ class Coordinator
     /**
      * Run all the migration mask
      *
-     * @\Nucleus\Console\CommandLine(name="nucleus_migration:runAll")
+     * @\Nucleus\Bundle\ConsoleBundle\Command\CommandLine(name="nucleus_migration:runAll")
      */
     public function runAll(OutputInterface $output, Command $parentCommand)
     {
@@ -90,7 +90,7 @@ class Coordinator
     /**
      * Manually run the migration tasked
      *
-     * @\Nucleus\Console\CommandLine(name="nucleus_migration:manual")
+     * @\Nucleus\Bundle\ConsoleBundle\Command\CommandLine(name="nucleus_migration:manual")
      */
     public function manual(OutputInterface $output, Command $parentCommand)
     {
@@ -132,7 +132,7 @@ class Coordinator
     /**
      * Display a report of registered migration task
      *
-     * @\Nucleus\Console\CommandLine(name="nucleus_migration:report")
+     * @\Nucleus\Bundle\ConsoleBundle\Command\CommandLine(name="nucleus_migration:report")
      */
     public function report(OutputInterface $output, Command $parentCommand)
     {
@@ -190,7 +190,7 @@ class Coordinator
     /**
      * Mark all the migration task as run
      *
-     * @\Nucleus\Console\CommandLine(name="nucleus_migration:markAllAsRun")
+     * @\Nucleus\Bundle\ConsoleBundle\Command\CommandLine(name="nucleus_migration:markAllAsRun")
      */
     public function markAllAsRun()
     {
@@ -204,7 +204,7 @@ class Coordinator
     /**
      * Run a task by it's id, use the migration:report to see all the task and their id
      *
-     * @\Nucleus\Console\CommandLine(name="nucleus_migration:runById")
+     * @\Nucleus\Bundle\ConsoleBundle\Command\CommandLine(name="nucleus_migration:runById")
      *
      * @param string $taskId The task id you want to run
      */

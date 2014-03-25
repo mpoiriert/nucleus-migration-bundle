@@ -1,6 +1,6 @@
 <?php
 
-namespace Nucleus\Migration;
+namespace Nucleus\Bundle\MigrationBundle\Migration;
 
 /**
  * @author Martin Poirier Theoret <mpoiriert@gmail.com>

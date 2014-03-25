@@ -27,5 +27,6 @@
             "Nucleus\\Bundle\\MigrationBundle": "src/",
             "Nucleus\\Migration": "src/"
         }
-    }
+    },
+    "target-dir": "Nucleus/Bundle/MigrationBundle"
 }

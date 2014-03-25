@@ -1,6 +1,9 @@
 nucleus-migration-bundle
 ========================
 
+[![Build Status](https://api.travis-ci.org/mpoiriert/nucleus-migration-bundle.png?branch=master)](http://travis-ci.org/nucleus-migration-bundle)
+They might be falling right now since there is a issue with Travis on command line test
+
 With this bundle you will be able to manage migration script. By configuration you will be able to call
 multiple command like you would have done with the CLI.
 

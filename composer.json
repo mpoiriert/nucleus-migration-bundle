@@ -24,8 +24,7 @@
     },
     "autoload": {
         "psr-0": {
-            "Nucleus\\Bundle\\MigrationBundle": "src/",
-            "Nucleus\\Migration": "src/"
+            "Nucleus\\Bundle\\MigrationBundle": ""
         }
     },
     "target-dir": "Nucleus/Bundle/MigrationBundle"

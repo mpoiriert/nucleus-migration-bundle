@@ -6,11 +6,18 @@ use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 use Symfony\Bundle\FrameworkBundle\Console\Application;
 use Symfony\Component\Console\Input\ArgvInput;
 use Symfony\Component\Console\Output\BufferedOutput;
-use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\Response;
 
 class NucleusMigrationExtensionTest extends WebTestCase
 {
+    private $files = array();
+
+    public function tearDown()
+    {
+        foreach($this->files as $file) {
+            unlink($file);
+        }
+    }
+
     public function provideTestCommand()
     {
         return array(
@@ -28,7 +35,7 @@ class NucleusMigrationExtensionTest extends WebTestCase
      * @param $command
      * @param $reportFile
      */
-    public function testCommand($command,$arguments, $reportFile, $inputStream = null)
+    public function testCommand($command,$arguments, $reportFile, $stringInput = null)
     {
         $client = static::createClient();
 
@@ -37,8 +44,9 @@ class NucleusMigrationExtensionTest extends WebTestCase
         $output = new BufferedOutput();
         $application->setAutoExit(false);
 
-        if($inputStream) {
-            $application->getHelperSet()->get('dialog')->setInputStream($this->getInputStream($inputStream));
+        if($stringInput) {
+            $inputStream = $this->getInputStream($stringInput);
+            $application->getHelperSet()->get('dialog')->setInputStream($inputStream);
         }
 
         //We push a empty argument that is ignore by the application and we push the command itself
@@ -49,11 +57,18 @@ class NucleusMigrationExtensionTest extends WebTestCase
         //file_put_contents($reportFile,$this->report($application));
 
         $this->assertStringEqualsFile($reportFile,$this->report($application));
+
+        if($stringInput) {
+            fclose($inputStream);
+        }
     }
 
     protected function getInputStream($input)
     {
-        $stream = fopen('php://memory', 'r+', false);
+        //using php://memory stream is causing problem with travis wasn't able to fix it
+        //so this is a work around
+        $this->files[] = $fileName = tempnam(sys_get_temp_dir(),'mig');
+        $stream = fopen($fileName, 'r+', false);
         fputs($stream, $input);
         rewind($stream);
 

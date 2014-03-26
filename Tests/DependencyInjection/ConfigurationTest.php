@@ -1,14 +1,6 @@
 <?php
-/**
- * Created by JetBrains PhpStorm.
- * User: Martin
- * Date: 14-02-03
- * Time: 13:23
- * To change this template use File | Settings | File Templates.
- */
 
 namespace Nucleus\Bundle\CoreBundle\Tests\DependencyInjection;
-
 
 use Nucleus\Bundle\MigrationBundle\DependencyInjection\Configuration;
 use Symfony\Component\Config\Definition\Exception\InvalidConfigurationException;

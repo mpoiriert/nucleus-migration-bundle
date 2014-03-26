@@ -13,6 +13,10 @@ nucleus_migration:
     versions: [v1]
     tasks:
         v1:
-            - {command: list, parameters: {} }
-            - {command: list, parameters: {param1: value1}, salt: first}
-            - {command: list, parameters: {param1: value1}, salt: second}
+            - {command: test:test, parameters: {} }
+            - {command: test:test, parameters: { "--name": value1}, salt: first}
+            - {command: test:test, parameters: { "--name": value1}, salt: second}
+
+services:
+    test_service:
+        class: Nucleus\Bundle\MigrationBundle\Tests\TestService

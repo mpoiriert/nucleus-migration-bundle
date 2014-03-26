@@ -243,7 +243,6 @@ class Coordinator
     {
         try {
             $command = $application->get($task->getCommandName());
-
             $arguments = array_merge(
                 array('command'=>$task->getCommandName()),
                 $task->getParameters()

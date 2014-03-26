@@ -9,14 +9,7 @@ use Symfony\Component\Console\Output\BufferedOutput;
 
 class NucleusMigrationExtensionTest extends WebTestCase
 {
-    private $files = array();
-
-    public function tearDown()
-    {
-        foreach($this->files as $file) {
-            unlink($file);
-        }
-    }
+    private $dev;
 
     public function provideTestCommand()
     {
@@ -35,18 +28,18 @@ class NucleusMigrationExtensionTest extends WebTestCase
      * @param $command
      * @param $reportFile
      */
-    public function testCommand($command,$arguments, $reportFile, $stringInput = null)
+    public function testCommand($command,$arguments, $reportFile, $inputStream = null)
     {
         $client = static::createClient();
 
         $application = new Application($client->getKernel());
+        $application->setCatchExceptions(false);
 
         $output = new BufferedOutput();
         $application->setAutoExit(false);
 
-        if($stringInput) {
-            $inputStream = $this->getInputStream($stringInput);
-            $application->getHelperSet()->get('dialog')->setInputStream($inputStream);
+        if($inputStream) {
+            $application->getHelperSet()->get('dialog')->setInputStream($this->getInputStream($inputStream));
         }
 
         //We push a empty argument that is ignore by the application and we push the command itself
@@ -54,21 +47,16 @@ class NucleusMigrationExtensionTest extends WebTestCase
 
         $application->run(new ArgvInput($arguments),$output);
 
-        //file_put_contents($reportFile,$this->report($application));
+        if($this->dev) {
+            file_put_contents($reportFile,$this->report($application));
+        }
 
         $this->assertStringEqualsFile($reportFile,$this->report($application));
-
-        if($stringInput) {
-            fclose($inputStream);
-        }
     }
 
     protected function getInputStream($input)
     {
-        //using php://memory stream is causing problem with travis wasn't able to fix it
-        //so this is a work around
-        $this->files[] = $fileName = tempnam(sys_get_temp_dir(),'mig');
-        $stream = fopen($fileName, 'r+', false);
+        $stream = fopen('php://memory', 'r+', false);
         fputs($stream, $input);
         rewind($stream);
 
